@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vibe Coding - Premium Coding Education</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "samsung-blue": "#034ea2",
+                        "samsung-gray": "#f4f4f4",
+                        "samsung-border": "#eeeeee",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-white text-black font-sans antialiased;
+                -webkit-tap-highlight-color: transparent;
+            }
+        }
+        .samsung-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+    <style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-samsung-blue/10">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-5 h-14 samsung-nav border-b border-samsung-border">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-black font-light">menu</span>
+                <h1 class="text-[17px] font-bold tracking-tight">바이브코딩</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-black font-light">search</span>
+                <span class="material-symbols-outlined text-black font-light">shopping_bag</span>
+                <span class="material-symbols-outlined text-black font-light">person</span>
+            </div>
+        </header>
+        <section class="relative w-full bg-samsung-gray">
+            <div
+                class="relative h-[560px] w-full flex flex-col items-center justify-start pt-16 text-center px-8 overflow-hidden">
+                <div class="z-10 flex flex-col items-center">
+                    <h2 class="text-[34px] font-bold leading-tight tracking-tight mb-3">Feel the Rhythm of Code</h2>
+                    <p class="text-[15px] font-normal text-zinc-600 mb-8 max-w-[280px]">Experience high-performance
+                        learning with AI-powered mentorship.</p>
+                    <div class="flex flex-col gap-3 w-full max-w-[200px]">
+                        <button class="bg-black text-white text-[13px] font-bold py-3 px-8 rounded-full">Buy
+                            Now</button>
+                        <button
+                            class="bg-transparent text-black text-[13px] font-bold py-3 px-8 border-b border-black inline-flex items-center justify-center gap-1">
+                            Learn More <span class="material-symbols-outlined text-sm">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute bottom-0 w-full h-1/2 px-4">
+                    <img alt="Hero Lifestyle" class="w-full h-full object-cover rounded-t-3xl shadow-2xl"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9QcAgOSrQD_FZp4e-xCeQJuB9FTCs4f1oaPBdBWQhIRUfWSvePXo3vUF_auIPUwJ2H1M8SlLLB8emGJAUCMxZ6lHkBrRV2QENIEYbi9W-6D4gUqHZF8I6Qft2CaIU7FCr8DUKkIPuuRSDsV9zz3tR0NdeGCwb5ec3DdqOuCEaGDPHLu3LgNVtxFvKDPz9TKkrLFRRXuR7zR8WcdI4g6pIEfmSYjDaV6hgVGoSwnlQCPlAvIKwLtj8fJnqYJmCrIDFIvf2ntrdAiNP" />
+                </div>
+            </div>
+        </section>
+        <section class="px-6 py-16 border-b border-samsung-border">
+            <div class="grid grid-cols-1 gap-12">
+                <div class="text-center flex flex-col items-center">
+                    <div class="mb-6">
+                        <span class="material-symbols-outlined text-[48px] font-thin text-samsung-blue">smart_toy</span>
+                    </div>
+                    <h3 class="text-[20px] font-bold mb-2">AI-Powered Logic</h3>
+                    <p class="text-[14px] text-zinc-500 leading-relaxed max-w-[260px]">Accelerate your development cycle
+                        with our proprietary real-time AI coding assistant.</p>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <div class="mb-6">
+                        <span class="material-symbols-outlined text-[48px] font-thin text-samsung-blue">groups</span>
+                    </div>
+                    <h3 class="text-[20px] font-bold mb-2">Global Community</h3>
+                    <p class="text-[14px] text-zinc-500 leading-relaxed max-w-[260px]">Connect with high-tier developers
+                        and sync your rhythm in collaborative sessions.</p>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <div class="mb-6">
+                        <span
+                            class="material-symbols-outlined text-[48px] font-thin text-samsung-blue">verified_user</span>
+                    </div>
+                    <h3 class="text-[20px] font-bold mb-2">Expert Mentorship</h3>
+                    <p class="text-[14px] text-zinc-500 leading-relaxed max-w-[260px]">Direct insights from industry
+                        leaders at the world's most innovative tech firms.</p>
+                </div>
+            </div>
+        </section>
+        <section class="py-16 bg-white overflow-hidden">
+            <div class="px-6 mb-10 flex items-center justify-between">
+                <h3 class="text-[24px] font-bold">Latest Programs</h3>
+                <a class="text-[14px] font-bold border-b border-black" href="#">View all</a>
+            </div>
+            <div class="flex gap-4 overflow-x-auto px-6 hide-scrollbar">
+                <div class="min-w-[280px] flex flex-col">
+                    <div class="bg-samsung-gray rounded-2xl p-0 overflow-hidden mb-4 h-[340px]">
+                        <img alt="Program" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtkGDCfXZD5ckeqtu_GKMSI155cTzQjv2lR1JE9nJQJsOWTwPZ3CzDXGz3_tvoj7gttVeBTrRveKOjwttQOZuKkyW7a04UcFz4ARiduwMVVVfu7klTvljSIepbT_EF8GwcJfIWdZOky0jWx6opIrPibFR7UVfUwsP-Jj1g5KryFgufAOv4x2LtC2Vyt_3xRzYIUytN7PsFlAbQaJGIpA6yeGe2K2ltgTXo3oAKsbwoJZ_1akFyPkd7oAKFvvvjad-TyGb8gS91Krqa" />
+                    </div>
+                    <span class="text-[12px] font-bold text-samsung-blue mb-1 uppercase tracking-wider">Education</span>
+                    <h4 class="text-[18px] font-bold mb-1">React Flow Mastery</h4>
+                    <p class="text-[14px] text-zinc-500">Advanced Frontend Series</p>
+                </div>
+                <div class="min-w-[280px] flex flex-col">
+                    <div class="bg-samsung-gray rounded-2xl p-0 overflow-hidden mb-4 h-[340px]">
+                        <img alt="Program" class="w-full h-full object-cover"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF1FnhKaaQUaBaNx6VcdMjvjiX4daFMmtj6gJ4S_VC8aMu2gBHGCNPQiX_OL9YyJYIQg_p8o9Di3pTCjwTLsxRuOq95zYsik8a-alJ7l0fAR-x9hdPBgxlRg1QNJQCje96fV0HYm4qScskeb2VJI09vo0jYEnplt1mNw1VAF4yVm5q7y6txS2yyjabo2_Eqf1l-Q0frbo5h-sGsBLaMT_3f0_FWOkdURGN0HACDUZZ4ypozF2ZyvyJTuiwRoAxp0QjDetmSoWkM1Kq" />
+                    </div>
+                    <span
+                        class="text-[12px] font-bold text-samsung-blue mb-1 uppercase tracking-wider">Infrastructure</span>
+                    <h4 class="text-[18px] font-bold mb-1">Architecture Vibe</h4>
+                    <p class="text-[14px] text-zinc-500">Cloud Systems Design</p>
+                </div>
+            </div>
+        </section>
+        <section class="px-6 py-20 bg-samsung-gray text-center">
+            <h3 class="text-[28px] font-bold mb-4">Stay in the loop</h3>
+            <p class="text-[15px] text-zinc-600 mb-8 max-w-[300px] mx-auto">Subscribe to get the latest updates on new
+                courses and special events.</p>
+            <div class="max-w-[320px] mx-auto">
+                <div class="relative border-b border-black mb-10">
+                    <input class="w-full bg-transparent border-none py-3 px-0 focus:ring-0 text-[15px]"
+                        placeholder="Email address" type="email" />
+                </div>
+                <button class="w-full bg-black text-white py-4 rounded-full text-[14px] font-bold">Sign up now</button>
+            </div>
+        </section>
+        <footer class="px-6 py-12 bg-white border-t border-samsung-border">
+            <div class="grid grid-cols-2 gap-8 mb-12">
+                <div>
+                    <h5 class="text-[13px] font-bold mb-4">Programs</h5>
+                    <ul class="flex flex-col gap-2 text-[13px] text-zinc-500">
+                        <li>All Courses</li>
+                        <li>Bootcamps</li>
+                        <li>Enterprise</li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-[13px] font-bold mb-4">Support</h5>
+                    <ul class="flex flex-col gap-2 text-[13px] text-zinc-500">
+                        <li>Contact Us</li>
+                        <li>FAQ</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-samsung-border flex flex-col gap-4">
+                <p class="text-[12px] text-zinc-400">Copyright © 2024 Vibe Coding. All rights reserved.</p>
+                <div class="flex gap-4">
+                    <span class="material-symbols-outlined text-zinc-400 text-[20px]">language</span>
+                    <span class="text-[12px] text-zinc-400 font-medium">South Korea / English</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

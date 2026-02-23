@@ -4,6 +4,7 @@ import com.example.vibeapp.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PostController {
@@ -20,8 +21,13 @@ public class PostController {
     }
 
     @GetMapping("/posts/{no}")
-    public String detail(@org.springframework.web.bind.annotation.PathVariable("no") Long no, Model model) {
+    public String detail(@PathVariable("no") Long no, Model model) {
         model.addAttribute("post", postService.getPostByNo(no));
         return "post_detail";
+    }
+
+    @GetMapping("/posts/new")
+    public String newForm() {
+        return "post_new_form";
     }
 }

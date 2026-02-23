@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Vibe Coding - Post List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "samsung-blue": "#034ea2",
+                        "samsung-gray": "#f4f4f4",
+                        "samsung-border": "#eeeeee",
+                    },
+                    fontFamily: {
+                        "sans": ["Inter", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-white text-black font-sans antialiased;
+            }
+        }
+        .samsung-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-samsung-blue/10">
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between px-5 h-14 samsung-nav border-b border-samsung-border">
+            <div class="flex items-center gap-4">
+                <a href="/"><span class="material-symbols-outlined text-black font-light">arrow_back</span></a>
+                <h1 class="text-[17px] font-bold tracking-tight">게시글 목록</h1>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-black font-light">search</span>
+                <span class="material-symbols-outlined text-black font-light">person</span>
+            </div>
+        </header>
+
+        <main class="flex-1 px-6 py-10 max-w-4xl mx-auto w-full">
+            <div class="mb-10">
+                <h2 class="text-[32px] font-bold mb-2">Notice</h2>
+                <p class="text-[15px] text-zinc-500">최신 기술 트렌드와 바이브코딩의 소식을 확인하세요.</p>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-b-2 border-black">
+                            <th class="py-4 text-left text-[13px] font-bold w-12">No</th>
+                            <th class="py-4 text-left text-[13px] font-bold">Title</th>
+                            <th class="py-4 text-left text-[13px] font-bold w-28">Date</th>
+                            <th class="py-4 text-right text-[13px] font-bold w-20">Views</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="post : ${posts}"
+                            class="border-b border-samsung-border hover:bg-samsung-gray transition-colors group">
+                            <td class="py-5 text-[14px]" th:text="${post.no}">1</td>
+                            <td class="py-5">
+                                <a href="#"
+                                    class="text-[15px] font-medium group-hover:text-samsung-blue transition-colors"
+                                    th:text="${post.title}">Title</a>
+                            </td>
+                            <td class="py-5 text-[13px] text-zinc-500"
+                                th:text="${#temporals.format(post.createdAt, 'yyyy.MM.dd')}">2024.01.01</td>
+                            <td class="py-5 text-right text-[13px] text-zinc-500" th:text="${post.views}">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-12 flex justify-center">
+                <button
+                    class="bg-black text-white text-[13px] font-bold py-3 px-10 rounded-full hover:bg-zinc-800 transition-colors">
+                    Write Post
+                </button>
+            </div>
+        </main>
+
+        <footer class="px-6 py-12 bg-samsung-gray border-t border-samsung-border mt-20">
+            <p class="text-[12px] text-zinc-400 text-center">Copyright © 2024 Vibe Coding. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -74,7 +74,7 @@
                             class="border-b border-samsung-border hover:bg-samsung-gray transition-colors group">
                             <td class="py-5 text-[14px]" th:text="${post.no}">1</td>
                             <td class="py-5">
-                                <a href="#"
+                                <a th:href="@{/posts/{no}(no=${post.no})}"
                                     class="text-[15px] font-medium group-hover:text-samsung-blue transition-colors"
                                     th:text="${post.title}">Title</a>
                             </td>

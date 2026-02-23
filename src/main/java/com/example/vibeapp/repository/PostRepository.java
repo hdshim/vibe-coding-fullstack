@@ -17,4 +17,10 @@ public class PostRepository {
     public void save(Post post) {
         posts.add(post);
     }
+
+    public java.util.Optional<Post> findByNo(Long no) {
+        return posts.stream()
+                .filter(post -> post.getNo().equals(no))
+                .findFirst();
+    }
 }

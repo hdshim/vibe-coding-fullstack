@@ -29,6 +29,23 @@ public class PostService {
         return post;
     }
 
+    public void addPost(String title, String content) {
+        Long nextNo = postRepository.findAll().stream()
+                .mapToLong(Post::getNo)
+                .max()
+                .orElse(0L) + 1;
+
+        Post post = new Post(
+                nextNo,
+                title,
+                content,
+                LocalDateTime.now(),
+                null,
+                0
+        );
+        postRepository.save(post);
+    }
+
     @PostConstruct
     public void initData() {
         for (long i = 1; i <= 10; i++) {

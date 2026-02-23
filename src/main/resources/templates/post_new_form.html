@@ -60,7 +60,7 @@
         </div>
 
         <div class="samsung-card p-8 md:p-10">
-            <form id="postForm" onsubmit="event.preventDefault(); handleRegister();">
+            <form id="postForm" action="/posts/add" method="POST">
                 <div class="space-y-6">
                     <!-- Title Input -->
                     <div>
@@ -94,20 +94,6 @@
             </form>
         </div>
     </main>
-
-    <script>
-        function handleRegister() {
-            const title = document.getElementById('title').value;
-            const content = document.getElementById('content').value;
-
-            if (!title || !content) {
-                alert('제목과 내용을 모두 입력해 주세요.');
-                return;
-            }
-
-            alert('새 게시글 등록');
-        }
-    </script>
 
     <footer class="mt-20 py-8 border-t border-gray-100 text-center">
         <p class="text-sm text-gray-400">© 2026 VIBEAPP. Samsung Style Premium Experience.</p>

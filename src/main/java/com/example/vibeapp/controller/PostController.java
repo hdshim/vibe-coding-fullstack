@@ -33,6 +33,12 @@ public class PostController {
         return "post_new_form";
     }
 
+    @GetMapping("/posts/{no}/edit")
+    public String editForm(@PathVariable("no") Long no, Model model) {
+        model.addAttribute("post", postService.getPostByNoOnly(no));
+        return "post_edit_form";
+    }
+
     @PostMapping("/posts/add")
     public String add(@RequestParam("title") String title, @RequestParam("content") String content) {
         postService.addPost(title, content);

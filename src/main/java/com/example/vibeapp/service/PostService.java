@@ -23,10 +23,14 @@ public class PostService {
     }
 
     public Post getPostByNo(Long no) {
-        Post post = postRepository.findByNo(no)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid post number: " + no));
+        Post post = getPostByNoOnly(no);
         post.setViews(post.getViews() + 1);
         return post;
+    }
+
+    public Post getPostByNoOnly(Long no) {
+        return postRepository.findByNo(no)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid post number: " + no));
     }
 
     public void addPost(String title, String content) {

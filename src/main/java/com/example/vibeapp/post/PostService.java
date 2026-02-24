@@ -1,5 +1,9 @@
 package com.example.vibeapp.post;
 
+import com.example.vibeapp.post.dto.PostCreateDto;
+import com.example.vibeapp.post.dto.PostListDto;
+import com.example.vibeapp.post.dto.PostResponseDto;
+import com.example.vibeapp.post.dto.PostUpdateDto;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +18,15 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public List<Post> getAllPosts() {
+    public List<PostListDto> getAllPosts() {
         return postRepository.findAll().stream()
                 .sorted((p1, p2) -> p2.getNo().compareTo(p1.getNo()))
+                .map(PostListDto::from)
                 .toList();
     }
 
-    public List<Post> getPostsPaged(int page, int size) {
-        List<Post> allPosts = getAllPosts();
+    public List<PostListDto> getPostsPaged(int page, int size) {
+        List<PostListDto> allPosts = getAllPosts();
         int fromIndex = (page - 1) * size;
         if (fromIndex >= allPosts.size()) {
             return List.of();
@@ -35,21 +40,25 @@ public class PostService {
         return (int) Math.ceil((double) totalPosts / size);
     }
 
-    public Post getPostByNo(Long no) {
-        Post post = getPostByNoOnly(no);
+    public PostResponseDto getPostByNo(Long no) {
+        Post post = getPostEntityByNo(no);
         post.setViews(post.getViews() + 1);
-        return post;
+        return PostResponseDto.from(post);
     }
 
-    public Post getPostByNoOnly(Long no) {
+    public PostResponseDto getPostByNoOnly(Long no) {
+        return PostResponseDto.from(getPostEntityByNo(no));
+    }
+
+    private Post getPostEntityByNo(Long no) {
         return postRepository.findByNo(no)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post number: " + no));
     }
 
-    public void updatePost(Long no, String title, String content) {
-        Post post = getPostByNoOnly(no);
-        post.setTitle(title);
-        post.setContent(content);
+    public void updatePost(Long no, PostUpdateDto updateDto) {
+        Post post = getPostEntityByNo(no);
+        post.setTitle(updateDto.getTitle());
+        post.setContent(updateDto.getContent());
         post.setUpdatedAt(LocalDateTime.now());
     }
 
@@ -57,20 +66,13 @@ public class PostService {
         postRepository.deleteByNo(no);
     }
 
-    public void createPost(String title, String content) {
+    public void createPost(PostCreateDto createDto) {
         Long nextNo = postRepository.findAll().stream()
                 .mapToLong(Post::getNo)
                 .max()
                 .orElse(0L) + 1;
 
-        Post post = new Post(
-                nextNo,
-                title,
-                content,
-                LocalDateTime.now(),
-                null,
-                0
-        );
+        Post post = createDto.toEntity(nextNo);
         postRepository.save(post);
     }
 

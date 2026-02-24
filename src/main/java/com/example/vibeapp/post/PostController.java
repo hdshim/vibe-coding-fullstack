@@ -1,8 +1,13 @@
 package com.example.vibeapp.post;
 
+import com.example.vibeapp.post.dto.PostCreateDto;
+import com.example.vibeapp.post.dto.PostUpdateDto;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,19 +36,25 @@ public class PostController {
     }
 
     @GetMapping("/posts/new")
-    public String newForm() {
+    public String newForm(Model model) {
+        model.addAttribute("postCreateDto", new PostCreateDto());
         return "post/post_new_form";
     }
 
     @GetMapping("/posts/{no}/edit")
     public String editForm(@PathVariable("no") Long no, Model model) {
-        model.addAttribute("post", postService.getPostByNoOnly(no));
+        model.addAttribute("postUpdateDto", postService.getPostByNoOnly(no));
+        model.addAttribute("postNo", no);
         return "post/post_edit_form";
     }
 
     @PostMapping("/posts/{no}/save")
-    public String update(@PathVariable("no") Long no, @RequestParam("title") String title, @RequestParam("content") String content) {
-        postService.updatePost(no, title, content);
+    public String update(@PathVariable("no") Long no, @Valid @ModelAttribute("postUpdateDto") PostUpdateDto updateDto, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("postNo", no);
+            return "post/post_edit_form";
+        }
+        postService.updatePost(no, updateDto);
         return "redirect:/posts/" + no;
     }
 
@@ -54,8 +65,11 @@ public class PostController {
     }
 
     @PostMapping("/posts/add")
-    public String create(@RequestParam("title") String title, @RequestParam("content") String content) {
-        postService.createPost(title, content);
+    public String create(@Valid @ModelAttribute("postCreateDto") PostCreateDto createDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "post/post_new_form";
+        }
+        postService.createPost(createDto);
         return "redirect:/posts";
     }
 }

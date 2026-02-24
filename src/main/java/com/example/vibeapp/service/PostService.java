@@ -22,6 +22,21 @@ public class PostService {
                 .toList();
     }
 
+    public List<Post> getPostsPaged(int page, int size) {
+        List<Post> allPosts = getAllPosts();
+        int fromIndex = (page - 1) * size;
+        if (fromIndex >= allPosts.size()) {
+            return List.of();
+        }
+        int toIndex = Math.min(fromIndex + size, allPosts.size());
+        return allPosts.subList(fromIndex, toIndex);
+    }
+
+    public int getTotalPages(int size) {
+        int totalPosts = postRepository.findAll().size();
+        return (int) Math.ceil((double) totalPosts / size);
+    }
+
     public Post getPostByNo(Long no) {
         Post post = getPostByNoOnly(no);
         post.setViews(post.getViews() + 1);
@@ -63,13 +78,13 @@ public class PostService {
 
     @PostConstruct
     public void initData() {
-        for (long i = 1; i <= 10; i++) {
+        for (long i = 1; i <= 23; i++) {
             Post post = new Post(
                 i,
                 "바이브코딩 - 게심물 제목 " + i,
                 "이것은 세련된 게시글 내용입니다. " + i,
-                LocalDateTime.now().minusDays(10 - i),
-                LocalDateTime.now().minusDays(10 - i),
+                LocalDateTime.now().minusDays(30 - i),
+                LocalDateTime.now().minusDays(30 - i),
                 (int) (Math.random() * 1000)
             );
             postRepository.save(post);

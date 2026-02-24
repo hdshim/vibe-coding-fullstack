@@ -97,6 +97,32 @@
                 </table>
             </div>
 
+            <!-- Pagination -->
+            <div class="mt-8 flex items-center justify-center space-x-2">
+                <!-- Previous -->
+                <a th:href="@{/posts(page=${currentPage - 1})}" th:if="${currentPage > 1}"
+                    class="flex items-center justify-center w-10 h-10 rounded-full text-zinc-400 hover:text-black hover:bg-zinc-100 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+                </a>
+
+                <!-- Page Numbers -->
+                <div class="flex items-center space-x-1">
+                    <th:block th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+                        <a th:href="@{/posts(page=${pageNum})}" th:text="${pageNum}"
+                            class="flex items-center justify-center min-w-[40px] h-10 px-3 rounded-full text-[14px] font-medium transition-all"
+                            th:classappend="${pageNum == currentPage} ? 'bg-black text-white' : 'text-zinc-500 hover:text-black hover:bg-zinc-100'">
+                            1
+                        </a>
+                    </th:block>
+                </div>
+
+                <!-- Next -->
+                <a th:href="@{/posts(page=${currentPage + 1})}" th:if="${currentPage < totalPages}"
+                    class="flex items-center justify-center w-10 h-10 rounded-full text-zinc-400 hover:text-black hover:bg-zinc-100 transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                </a>
+            </div>
+
             <div class="mt-12 flex justify-center">
                 <a href="/posts/new"
                     class="bg-black text-white text-[13px] font-bold py-3 px-10 rounded-full hover:bg-zinc-800 transition-colors inline-block text-center">

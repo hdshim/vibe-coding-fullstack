@@ -33,6 +33,13 @@ public class PostService {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid post number: " + no));
     }
 
+    public void updatePost(Long no, String title, String content) {
+        Post post = getPostByNoOnly(no);
+        post.setTitle(title);
+        post.setContent(content);
+        post.setUpdatedAt(LocalDateTime.now());
+    }
+
     public void addPost(String title, String content) {
         Long nextNo = postRepository.findAll().stream()
                 .mapToLong(Post::getNo)

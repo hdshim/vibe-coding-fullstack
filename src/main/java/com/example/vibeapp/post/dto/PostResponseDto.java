@@ -37,4 +37,15 @@ public class PostResponseDto {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
     public Integer getViews() { return views; }
+
+    public Post toEntity() {
+        return new Post(
+                no,
+                title,
+                content,
+                createdAt,
+                updatedAt,
+                views
+        );
+    }
 }

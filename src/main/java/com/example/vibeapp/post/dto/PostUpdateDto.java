@@ -1,7 +1,9 @@
 package com.example.vibeapp.post.dto;
 
+import com.example.vibeapp.post.Post;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 public class PostUpdateDto {
 
@@ -22,4 +24,19 @@ public class PostUpdateDto {
     public void setTitle(String title) { this.title = title; }
     public String getContent() { return content; }
     public void setContent(String content) { this.content = content; }
+
+    public static PostUpdateDto from(Post post) {
+        return new PostUpdateDto(post.getTitle(), post.getContent());
+    }
+
+    public Post toEntity(Long no, LocalDateTime createdAt, int views) {
+        return new Post(
+                no,
+                title,
+                content,
+                createdAt,
+                LocalDateTime.now(),
+                views
+        );
+    }
 }

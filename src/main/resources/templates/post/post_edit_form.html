@@ -93,7 +93,7 @@
                         <!-- 조회수 (Read-only) -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">조회수</label>
-                            <input type="text" th:value="*{views}" readonly
+                            <input type="text" th:value="${postResponseDto.views}" readonly
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 cursor-not-allowed">
                         </div>
                     </div>
@@ -102,7 +102,7 @@
                         <!-- 생성일 (Read-only) -->
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">생성일</label>
-                            <input type="text" th:value="${#temporals.format(postUpdateDto.createdAt, 'yyyy-MM-dd')}"
+                            <input type="text" th:value="${#temporals.format(postResponseDto.createdAt, 'yyyy-MM-dd')}"
                                 readonly
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 cursor-not-allowed">
                         </div>
@@ -110,7 +110,7 @@
                         <div>
                             <label class="block text-sm font-semibold text-gray-700 mb-2">수정일</label>
                             <input type="text"
-                                th:value="${postUpdateDto.updatedAt != null ? #temporals.format(postUpdateDto.updatedAt, 'yyyy-MM-dd') : ''}"
+                                th:value="${postResponseDto.updatedAt != null ? #temporals.format(postResponseDto.updatedAt, 'yyyy-MM-dd') : ''}"
                                 readonly
                                 class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-500 cursor-not-allowed">
                         </div>

@@ -1,6 +1,7 @@
 package com.example.vibeapp.post;
 
 import com.example.vibeapp.post.dto.PostCreateDto;
+import com.example.vibeapp.post.dto.PostResponseDto;
 import com.example.vibeapp.post.dto.PostUpdateDto;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -23,9 +24,7 @@ public class PostController {
     @GetMapping("/posts")
     public String list(@RequestParam(value = "page", defaultValue = "1") int page, Model model) {
         int pageSize = 5;
-        model.addAttribute("posts", postService.getPostsPaged(page, pageSize));
-        model.addAttribute("currentPage", page);
-        model.addAttribute("totalPages", postService.getTotalPages(pageSize));
+        model.addAttribute("pageResponse", postService.getPostsPaged(page, pageSize));
         return "post/posts";
     }
 
@@ -43,7 +42,9 @@ public class PostController {
 
     @GetMapping("/posts/{no}/edit")
     public String editForm(@PathVariable("no") Long no, Model model) {
-        model.addAttribute("postUpdateDto", postService.getPostByNoOnly(no));
+        PostResponseDto post = postService.getPostByNoOnly(no);
+        model.addAttribute("postUpdateDto", PostUpdateDto.from(post.toEntity())); // Strictly using PostUpdateDto for binding
+        model.addAttribute("postResponseDto", post); // Using for displaying read-only fields
         model.addAttribute("postNo", no);
         return "post/post_edit_form";
     }

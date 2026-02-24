@@ -2,6 +2,7 @@ package com.example.vibeapp.post;
 
 import com.example.vibeapp.post.dto.PostCreateDto;
 import com.example.vibeapp.post.dto.PostListDto;
+import com.example.vibeapp.post.dto.PostPageDto;
 import com.example.vibeapp.post.dto.PostResponseDto;
 import com.example.vibeapp.post.dto.PostUpdateDto;
 import jakarta.annotation.PostConstruct;
@@ -25,14 +26,17 @@ public class PostService {
                 .toList();
     }
 
-    public List<PostListDto> getPostsPaged(int page, int size) {
+    public PostPageDto getPostsPaged(int page, int size) {
         List<PostListDto> allPosts = getAllPosts();
+        int totalPosts = allPosts.size();
+        int totalPages = (int) Math.ceil((double) totalPosts / size);
+
         int fromIndex = (page - 1) * size;
         if (fromIndex >= allPosts.size()) {
-            return List.of();
+            return new PostPageDto(List.of(), page, totalPages);
         }
         int toIndex = Math.min(fromIndex + size, allPosts.size());
-        return allPosts.subList(fromIndex, toIndex);
+        return new PostPageDto(allPosts.subList(fromIndex, toIndex), page, totalPages);
     }
 
     public int getTotalPages(int size) {
@@ -57,9 +61,8 @@ public class PostService {
 
     public void updatePost(Long no, PostUpdateDto updateDto) {
         Post post = getPostEntityByNo(no);
-        post.setTitle(updateDto.getTitle());
-        post.setContent(updateDto.getContent());
-        post.setUpdatedAt(LocalDateTime.now());
+        Post updatedPost = updateDto.toEntity(no, post.getCreatedAt(), post.getViews());
+        postRepository.save(updatedPost);
     }
 
     public void deletePost(Long no) {

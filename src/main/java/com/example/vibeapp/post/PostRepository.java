@@ -15,6 +15,7 @@ public class PostRepository {
     }
 
     public void save(Post post) {
+        posts.removeIf(p -> p.getNo().equals(post.getNo()));
         posts.add(post);
     }
 

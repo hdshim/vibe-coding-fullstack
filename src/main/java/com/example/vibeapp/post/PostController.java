@@ -35,8 +35,8 @@ public class PostController {
     }
 
     @GetMapping("/posts/new")
-    public String newForm(Model model) {
-        model.addAttribute("postCreateDto", new PostCreateDto());
+    public String addForm(Model model) {
+        model.addAttribute("postCreateDto", new PostCreateDto(null, null));
         return "post/post_new_form";
     }
 
@@ -50,12 +50,14 @@ public class PostController {
     }
 
     @PostMapping("/posts/{no}/save")
-    public String update(@PathVariable("no") Long no, @Valid @ModelAttribute("postUpdateDto") PostUpdateDto updateDto, BindingResult bindingResult, Model model) {
+    public String update(@PathVariable("no") Long no, @Valid @ModelAttribute PostUpdateDto postUpdateDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            PostResponseDto post = postService.getPostByNoOnly(no);
+            model.addAttribute("postResponseDto", post);
             model.addAttribute("postNo", no);
             return "post/post_edit_form";
         }
-        postService.updatePost(no, updateDto);
+        postService.updatePost(no, postUpdateDto);
         return "redirect:/posts/" + no;
     }
 
@@ -66,11 +68,11 @@ public class PostController {
     }
 
     @PostMapping("/posts/add")
-    public String create(@Valid @ModelAttribute("postCreateDto") PostCreateDto createDto, BindingResult bindingResult) {
+    public String create(@Valid @ModelAttribute PostCreateDto postCreateDto, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "post/post_new_form";
         }
-        postService.createPost(createDto);
+        postService.createPost(postCreateDto);
         return "redirect:/posts";
     }
 }

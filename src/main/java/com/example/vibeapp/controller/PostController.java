@@ -45,6 +45,12 @@ public class PostController {
         return "redirect:/posts/" + no;
     }
 
+    @GetMapping("/posts/{no}/delete")
+    public String delete(@PathVariable("no") Long no) {
+        postService.deletePost(no);
+        return "redirect:/posts";
+    }
+
     @PostMapping("/posts/add")
     public String add(@RequestParam("title") String title, @RequestParam("content") String content) {
         postService.addPost(title, content);

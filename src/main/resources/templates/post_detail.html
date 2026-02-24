@@ -117,8 +117,7 @@
                     </svg>
                     수정하기
                 </a>
-                <button type="button"
-                    th:onclick="|if(confirm('정말 삭제하시겠습니까?')) location.href='/posts/' + ${post.no} + '/delete'|"
+                <a th:href="@{/posts/{no}/delete(no=${post.no})}" onclick="return confirm('정말 삭제하시겠습니까?')"
                     class="inline-flex items-center px-6 py-3 border border-red-200 shadow-sm text-base font-medium rounded-xl text-red-600 bg-white hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200">
                     <svg class="mr-2 -ml-1 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -126,7 +125,7 @@
                         </path>
                     </svg>
                     삭제하기
-                </button>
+                </a>
             </div>
             <div class="text-xs text-gray-400">
                 최종 수정: <span th:text="${#temporals.format(post.updatedAt, 'yyyy.MM.dd HH:mm')}">2023.10.01</span>

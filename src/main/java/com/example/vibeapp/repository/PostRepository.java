@@ -5,10 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Repository
 public class PostRepository {
-    private static final List<Post> posts = new ArrayList<>();
+    private final List<Post> posts = new CopyOnWriteArrayList<>();
 
     public List<Post> findAll() {
         return new ArrayList<>(posts);

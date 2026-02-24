@@ -1,7 +1,5 @@
-package com.example.vibeapp.service;
+package com.example.vibeapp.post;
 
-import com.example.vibeapp.domain.Post;
-import com.example.vibeapp.repository.PostRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 
@@ -56,6 +54,7 @@ public class PostService {
     }
 
     public void deletePost(Long no) {
+        System.out.println("Service: deletePost(" + no + ") called");
         postRepository.deleteByNo(no);
     }
 
@@ -78,6 +77,11 @@ public class PostService {
 
     @PostConstruct
     public void initData() {
+        if (!postRepository.findAll().isEmpty()) {
+            System.out.println("Service: initData skipped (already has data)");
+            return;
+        }
+        System.out.println("Service: initData running (adding 23 posts)");
         for (long i = 1; i <= 23; i++) {
             Post post = new Post(
                 i,

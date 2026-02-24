@@ -54,11 +54,10 @@ public class PostService {
     }
 
     public void deletePost(Long no) {
-        System.out.println("Service: deletePost(" + no + ") called");
         postRepository.deleteByNo(no);
     }
 
-    public void addPost(String title, String content) {
+    public void createPost(String title, String content) {
         Long nextNo = postRepository.findAll().stream()
                 .mapToLong(Post::getNo)
                 .max()
@@ -78,10 +77,8 @@ public class PostService {
     @PostConstruct
     public void initData() {
         if (!postRepository.findAll().isEmpty()) {
-            System.out.println("Service: initData skipped (already has data)");
             return;
         }
-        System.out.println("Service: initData running (adding 23 posts)");
         for (long i = 1; i <= 23; i++) {
             Post post = new Post(
                 i,

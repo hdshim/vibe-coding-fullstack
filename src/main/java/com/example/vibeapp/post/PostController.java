@@ -42,21 +42,20 @@ public class PostController {
     }
 
     @PostMapping("/posts/{no}/save")
-    public String save(@PathVariable("no") Long no, @RequestParam("title") String title, @RequestParam("content") String content) {
+    public String update(@PathVariable("no") Long no, @RequestParam("title") String title, @RequestParam("content") String content) {
         postService.updatePost(no, title, content);
         return "redirect:/posts/" + no;
     }
 
     @GetMapping("/posts/{no}/delete")
     public String delete(@PathVariable("no") Long no) {
-        System.out.println("Controller: GET /posts/" + no + "/delete called");
         postService.deletePost(no);
         return "redirect:/posts";
     }
 
     @PostMapping("/posts/add")
-    public String add(@RequestParam("title") String title, @RequestParam("content") String content) {
-        postService.addPost(title, content);
+    public String create(@RequestParam("title") String title, @RequestParam("content") String content) {
+        postService.createPost(title, content);
         return "redirect:/posts";
     }
 }

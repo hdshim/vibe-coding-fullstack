@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 @Repository
 public class PostRepository {
-    private final List<Post> posts = new CopyOnWriteArrayList<>();
+    private static final List<Post> posts = new CopyOnWriteArrayList<>();
 
     public List<Post> findAll() {
         return new ArrayList<>(posts);
